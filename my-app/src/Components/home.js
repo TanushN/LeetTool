@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Dropdown, Label } from "semantic-ui-react";
+import { Button, Dropdown, Grid } from "semantic-ui-react";
 
 const Home = () => {
   const options = [
@@ -132,7 +132,6 @@ const Home = () => {
     "array",
   ];
 
-
   const [tags, setTags] = useState([]);
 
   const selectionOnChange = (e, data) => {
@@ -142,45 +141,52 @@ const Home = () => {
   const [url, setUrl] = useState("");
 
   const handleButtonChange = () => {
-    
-    var base_url = 'https://leetcode.com/problemset/all/?topicSlugs='
+    var base_url = "https://leetcode.com/problemset/all/?topicSlugs=";
 
-    var sep = '%2C'
+    var sep = "%2C";
 
-    for(var i = 0; i < completeTags.length; i++) {
-
-        if(tags.includes(completeTags[i])){
-            continue
-        }
-        else{
-            base_url += completeTags[i] + sep
-        }
-        
-
+    for (var i = 0; i < completeTags.length; i++) {
+      if (tags.includes(completeTags[i])) {
+        continue;
+      } else {
+        base_url += completeTags[i] + sep;
+      }
     }
 
-    console.log(base_url)
-    window.open(base_url, "_blank")
-    setUrl(base_url)
-
-
-  }
+    console.log(base_url);
+    window.open(base_url, "_blank");
+    setUrl(base_url);
+  };
 
   return (
     <div>
-      <h1>LeetTool</h1>
-      <Dropdown
-        placeholder="State"
-        fluid
-        selection
-        multiple
-        search
-        options={options}
-        onChange={selectionOnChange}
-      />
-
-      <Button onClick={handleButtonChange}>Get</Button>
-      
+      <Grid
+        centered
+        style={{
+          paddingTop: "50px",
+        }}
+      >
+        <h1>LeetTool</h1>
+        <Dropdown
+          style={{
+            paddingTop: "10px",
+          }}
+          placeholder="Category"
+          fluid
+          selection
+          multiple
+          search
+          options={options}
+          onChange={selectionOnChange}
+        />
+        <div
+          style={{
+            paddingTop: "10px",
+          }}
+        >
+          <Button onClick={handleButtonChange}>Get</Button>
+        </div>
+      </Grid>
     </div>
   );
 };
